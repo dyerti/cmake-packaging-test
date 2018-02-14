@@ -7,37 +7,7 @@ find_package(libssh REQUIRED)
 add_library(ProjA SHARED a.cpp)
 target_link_libraries(ProjA PUBLIC Threads::Threads ${LIBSSH_LIBRARIES})
 
-install(TARGETS ProjA EXPORT ProjATargets
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-  RUNTIME DESTINATION bin
-  INCLUDES DESTINATION include
-)
+add_library(AwesomeStatic a.cpp)
 
-export(EXPORT ProjATargets
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/ProjA/ProjATargets.cmake"
-  NAMESPACE Coolio::
-)
-
-configure_file(cmake/ProjAConfig.cmake
-  "${CMAKE_CURRENT_BINARY_DIR}/ProjA/ProjAConfig.cmake"
-  COPYONLY
-)
-
-set(ConfigPackageLocation lib/cmake/ProjA)
-install(EXPORT ProjATargets
-  FILE
-    ProjATargets.cmake
-  NAMESPACE
-    Coolio::
-  DESTINATION
-    ${ConfigPackageLocation}
-)
-install(
-  FILES
-    cmake/ProjAConfig.cmake
-  DESTINATION
-    ${ConfigPackageLocation}
-  COMPONENT
-    Devel
-)
+include(../cmake/InstallHelper.cmake)
+install_target_helper(TARGETS ProjA AwesomeStatic VERSION 1.2 NAMESPACE Coolio::)
