@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#include "ProjA/a.h"
+#include "ProjB/b.h"
+
 int doA();
 int doB();
 

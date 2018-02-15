@@ -38,7 +38,7 @@ macro(install_target_helper)
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
-    #INCLUDES DESTINATION include
+    INCLUDES DESTINATION include
   )
 
   include(CMakePackageConfigHelpers)
